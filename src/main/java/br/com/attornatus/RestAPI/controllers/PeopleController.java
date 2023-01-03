@@ -14,12 +14,12 @@ import java.util.List;
 @RequestMapping({"/people"})
 public class PeopleController {
 
+
+
     @Autowired
     private PeopleService peopleService;
-
     @Autowired
     private ModelMapper modelMapper;
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public People createPeople(@RequestBody People people){
@@ -65,7 +65,6 @@ public class PeopleController {
         peopleService.getPeopleByID(id)
                 .map(peopleBase -> {
                     modelMapper.map(people, peopleBase);
-                    people.setId(peopleBase.getId());
                     peopleService.updatePeople(people);
                     return Void.TYPE;
                 }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada"));
