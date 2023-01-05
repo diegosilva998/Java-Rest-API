@@ -1,5 +1,6 @@
 package br.com.attornatus.RestAPI.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,8 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "ADDRESS_ID")
+    private int addressID;
     @Column(name = "STREET",length = 255,nullable = false)
     private String street;
     @Column(name = "POST_CODE",length = 255,nullable = false)
@@ -23,7 +25,12 @@ public class Address {
     @Column(name = "CITY",length = 255,nullable = false)
     private String city;
 
-    @ManyToOne()
-    @JoinColumn(name = "person_id", nullable = false)
+    @Column(name="IS_MAIN_ADDRESS")
+    private Boolean isMainAddress;
+
+    @ManyToOne
+    @JoinColumn(name="people_id", nullable=false)
+    @JsonIgnore
     private People people;
+
 }

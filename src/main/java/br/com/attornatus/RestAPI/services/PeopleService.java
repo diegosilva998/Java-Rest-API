@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Service
 public class PeopleService {
-
     @Autowired
     private PeopleRepository peopleRepository;
 
@@ -19,6 +18,7 @@ public class PeopleService {
     }
 
     public Optional<People> getPeopleByID(int id){
+        System.out.println(peopleRepository.findById(id));
         return peopleRepository.findById(id);
     }
 
@@ -26,8 +26,7 @@ public class PeopleService {
         return peopleRepository.save(people);
     }
 
-    public void updatePeople(People people){
-        peopleRepository.save(people);
+    public void updatePeople(People people) {peopleRepository.save(people);
     }
     public void deletePeople(int id){
         peopleRepository.deleteById(id);

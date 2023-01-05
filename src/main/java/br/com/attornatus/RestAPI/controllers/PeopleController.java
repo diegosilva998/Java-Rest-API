@@ -53,7 +53,7 @@ public class PeopleController {
     public void updatePutPeople(@RequestBody People people,@PathVariable("id") int id){
         peopleService.getPeopleByID(id)
                 .map(peopleBase -> {
-                    people.setId(peopleBase.getId());
+                    people.setPeopleID(peopleBase.getPeopleID());
                     peopleService.updatePeople(people);
                     return Void.TYPE;
                 }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada"));
@@ -64,8 +64,9 @@ public class PeopleController {
     public void updatePatchPeople(@RequestBody People people,@PathVariable("id") int id){
         peopleService.getPeopleByID(id)
                 .map(peopleBase -> {
+                    people.setPeopleID(peopleBase.getPeopleID());
                     modelMapper.map(people, peopleBase);
-                    peopleService.updatePeople(people);
+                    peopleService.createPeople(peopleBase);
                     return Void.TYPE;
                 }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada"));
     }

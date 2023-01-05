@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -16,12 +17,15 @@ import java.util.Set;
 public class People implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
-    @Column(name="NAME",length = 255,nullable = false)
+    @Column(name = "PEOPLE_ID")
+    private int peopleID;
+    @Column(name="NAME",length = 255)
     private String name;
-    @Column(name="BIRTH_DATE", length=50, nullable=false, unique=false)
+    @Column(name="BIRTH_DATE", length=50, unique=false)
     private Date birthDate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "people")
-    private Set<Address> address;
+    @OneToMany
+    @Column
+    private List<Address> addresses;
+
 }
