@@ -30,7 +30,6 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name="people_id", nullable=false)
-    @JsonIgnore
     private People people;
 
 }

@@ -7,7 +7,6 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +24,7 @@ public class People implements Serializable {
     private Date birthDate;
 
     @OneToMany
-    @Column
+    @JsonIgnore
     private List<Address> addresses;
 
 }

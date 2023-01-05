@@ -14,8 +14,6 @@ import java.util.List;
 @RequestMapping({"/people"})
 public class PeopleController {
 
-
-
     @Autowired
     private PeopleService peopleService;
     @Autowired
@@ -50,7 +48,7 @@ public class PeopleController {
     }
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePutPeople(@RequestBody People people,@PathVariable("id") int id){
+    public void updatePutPeople(@RequestBody People people, @PathVariable("id") int id){
         peopleService.getPeopleByID(id)
                 .map(peopleBase -> {
                     people.setPeopleID(peopleBase.getPeopleID());
@@ -61,12 +59,12 @@ public class PeopleController {
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePatchPeople(@RequestBody People people,@PathVariable("id") int id){
+    public void updatePatchPeople(@RequestBody People people, @PathVariable("id") int id){
         peopleService.getPeopleByID(id)
                 .map(peopleBase -> {
                     people.setPeopleID(peopleBase.getPeopleID());
                     modelMapper.map(people, peopleBase);
-                    peopleService.createPeople(peopleBase);
+                    peopleService.updatePeople(peopleBase);
                     return Void.TYPE;
                 }).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada"));
     }

@@ -18,7 +18,6 @@ public class PeopleService {
     }
 
     public Optional<People> getPeopleByID(int id){
-        System.out.println(peopleRepository.findById(id));
         return peopleRepository.findById(id);
     }
 
@@ -26,7 +25,8 @@ public class PeopleService {
         return peopleRepository.save(people);
     }
 
-    public void updatePeople(People people) {peopleRepository.save(people);
+    public People updatePeople(People people){
+        return peopleRepository.save(people);
     }
     public void deletePeople(int id){
         peopleRepository.deleteById(id);
